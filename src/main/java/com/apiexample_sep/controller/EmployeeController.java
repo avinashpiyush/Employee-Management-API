@@ -89,10 +89,13 @@ public class EmployeeController {
     @GetMapping("/all")
     public ResponseEntity<APIResponce<List<Employee>>> getEmployees(
            @RequestParam(name="pageNo",defaultValue = "0",required = false) int pageNo,
-            @RequestParam(name = "pageSize",defaultValue = "5",required = false) int pageSize
+            @RequestParam(name = "pageSize",defaultValue = "5",required = false) int pageSize,
+           @RequestParam(name = "sortBy",defaultValue = "id",required = false) String sortBy,
+           @RequestParam(name = "sortDir",defaultValue = "id",required = false) String sortDir
+
     ) {
 
-        List<Employee> employees = employeeService.getALlEmployees(pageNo,pageSize);
+        List<Employee> employees = employeeService.getALlEmployees(pageNo, pageSize, sortBy,sortDir);
         APIResponce<List<Employee>> responce = new APIResponce<>();
         responce.setMessage("Done");
         responce.setData(employees);
